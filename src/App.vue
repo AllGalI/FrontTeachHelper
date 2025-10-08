@@ -1,21 +1,16 @@
 <script setup>
+import HomePageButton from "/src/components/HomePageButton.vue"
 </script>
 
 <template>
 	<div id="app">
-		<header>
-			<nav>
-			<router-link to="/login">Вход</router-link>
-			<router-link to="/registration">Регистрация</router-link>
-			</nav>
+		<header class="header">
+				<HomePageButton />
 		</header>
-		<router-view />
+		<!-- <router-view /> -->
 	</div>
 </template>
 
 <style scoped>
-nav {
-	display: flex;
-	gap: 1rem;
-}
+
 </style>
