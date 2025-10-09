@@ -1,0 +1,198 @@
+<template>
+  <div class="teach-helper-app">
+    <!-- <header class="header">
+      <div class="header-logo">
+        <svg class="header-logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M9 16.172l-4.172-4.172-1.414 1.414L9 19 21 7l-1.414-1.414z"/>
+        </svg>
+        <span class="header-logo-text">Teach Helper</span>
+      </div>
+      <nav class="header-nav">
+        <a href="#" class="header-nav-link">About</a>
+        <a href="#" class="header-nav-link">Features</a>
+        <a href="#" class="header-nav-link">Pricing</a>
+        <a href="#" class="header-nav-link">Contact</a>
+      </nav>
+      <button class="header-signup-btn">Sign Up</button>
+    </header> -->
+
+    <main class="main-content">
+      <div class="main-text-block">
+        <h1 class="main-title">Simplify Your Teaching with Teach Helper</h1>
+        <p class="main-subtitle">The ultimate tool for teachers to check homework efficiently and accurately</p>
+        <button class="main-cta-btn" @click="getStarted">Get Started</button>
+      </div>
+    </main>
+  </div>
+</template>
+
+<script>
+// Используем Composition API (setup) - современный стандарт для Vue 3
+export default {
+  name: 'TeachHelper',
+  setup() {
+    // Функция для кнопки "Get Started"
+    const getStarted = () => {
+      alert('Начинаем работу с Teach Helper!');
+      // В реальном приложении здесь будет логика роутинга или открытия модального окна
+    };
+
+    return {
+      getStarted
+      // Здесь можно добавить реактивные переменные (ref, reactive)
+    };
+  }
+};
+</script>
+
+<style scoped>
+/* Стили, применённые только к этому компоненту */
+
+.teach-helper-app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    /* ЗАГЛУШКА ФОНОВОЙ КАРТИНКИ: замените на вашу картинку */
+    background: "src/assets/1200px-Elegant_Background-18.jpg";
+    font-family: 'Roboto', sans-serif; /* Предполагается, что шрифт подключен в index.html */
+    color: #333;
+}
+
+/* --- Хедер --- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #ddd;
+    position: sticky; /* Опционально: для фиксации хедера */
+    top: 0;
+    z-index: 10;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a73e8;
+}
+
+.header-logo-icon {
+    width: 30px;
+    height: 30px;
+    fill: #1a73e8;
+    margin-right: 10px;
+}
+
+.header-nav {
+    display: flex;
+    gap: 30px;
+}
+
+.header-nav-link {
+    color: #555;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.header-nav-link:hover {
+    color: #1a73e8;
+}
+
+.header-signup-btn {
+    background-color: #1a73e8;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.header-signup-btn:hover {
+    background-color: #145cb3;
+}
+
+/* --- Основной Контент --- */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.main-text-block {
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    padding: 40px 60px;
+    border-radius: 10px;
+    max-width: 800px;
+}
+
+.main-title {
+    font-size: 48px;
+    font-weight: 700;
+    margin: 0 0 20px;
+    color: #333;
+}
+
+.main-subtitle {
+    font-size: 20px;
+    margin: 0 0 40px;
+    color: #666;
+}
+
+.main-cta-btn {
+    background-color: #1a73e8;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.main-cta-btn:hover {
+    background-color: #145cb3;
+}
+
+/* --- Медиа-запросы для адаптивности --- */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .header-nav {
+        margin-top: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+    
+    .header-logo {
+        margin-bottom: 10px;
+    }
+
+    .header-signup-btn {
+        margin-top: 15px;
+    }
+
+    .main-title {
+        font-size: 36px;
+    }
+
+    .main-text-block {
+        padding: 20px;
+        margin: 20px;
+    }
+}
+</style>
