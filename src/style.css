@@ -1,13 +1,6 @@
-body {
-	margin: 0;
-	padding: 0;
-	min-height: 100vh;
-}
-
-#app {
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
+html, body, #app {
+  height: 100%;
+  margin: 0; 
 }
 
 .container {
@@ -18,10 +11,38 @@ body {
 	padding: 20px;
 }
 
+.header {
+	max-width: 1200px;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0 20px;
+
+}
+
+.header_container {
+	width: 100%;
+	box-shadow: 0 2px 4px var(--border-collor);
+}
+
+
+.row{
+	display: flex;
+	flex-direction:	row;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+}
+
+
 :root {
 	--color-primary: #1a73e8;
 	--color-primary-dark: #042b5a;
 
+	--color-gray-cool: #B0A8B9;
+
 	--header-font-size: 16px;
 	--header-font-weight: 400;
+
+	--border-collor: #00000013
 }
