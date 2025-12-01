@@ -1,6 +1,12 @@
 html, body, #app {
-  height: 100%;
-  margin: 0; 
+	height: 100%;
+	margin: 0;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
 }
 
 .container {
@@ -17,7 +23,6 @@ html, body, #app {
 	margin-left: auto;
 	margin-right: auto;
 	padding: 0 20px;
-
 }
 
 .header_container {
@@ -25,24 +30,22 @@ html, body, #app {
 	box-shadow: 0 2px 4px var(--border-collor);
 }
 
-
-.row{
+.row {
 	display: flex;
-	flex-direction:	row;
+	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
 	gap: 10px;
 }
 
-
 :root {
 	--color-primary: #1a73e8;
 	--color-primary-dark: #042b5a;
-
+	--color-white: rgb(242, 243, 234);
 	--color-gray-cool: #B0A8B9;
-
 	--header-font-size: 16px;
 	--header-font-weight: 400;
+	--border-collor: #00000013 ;
 
-	--border-collor: #00000013
+	--shadow: 0 2px 4px var(--border-collor);
 }

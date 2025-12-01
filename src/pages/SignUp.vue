@@ -16,13 +16,13 @@
 				<h2>Sign up for TeachHelper</h2>
 				<button class="oauth2Button">
 					<img class="oauth2ButtonImage" src="@/assets/gmail.jpg" alt="gmail">
-					Continue with Google</button>
+					Continue with Google
+				</button>
 				<button class="oauth2Button">
 					<img class="oauth2ButtonImage" src="@/assets/mail.jpg" alt="mail">
-					Continue with Mail</button>
-				<div class="authentication-divider">
-					or
-				</div>
+					Continue with Mail
+				</button>
+				<div class="authentication-divider">or</div>
 				<label for="email">Email</label>
 				<input type="email" class="reg_card_field" name="email" placeholder="Email" required>
 				<label for="password">Password</label>
@@ -124,6 +124,13 @@ select {
 	background-color: #e5eaf0;
 }
 
+
+.oauth2ButtonImage {
+	width: 20px;
+	height: 20px;
+	border-radius: 5px;
+}
+
 .submitButton {
 	color: white;
 	/* background-color: var(--color-primary); */
@@ -136,12 +143,6 @@ select {
 
 .submitButton:hover {
   background-position: right center; /* создаёт эффект движения градиента */
-}
-
-.oauth2ButtonImage {
-	width: 20px;
-	height: 20px;
-	border-radius: 5px;
 }
 
 .signinButton {

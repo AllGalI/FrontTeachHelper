@@ -7,13 +7,19 @@ import Login from '../pages/Login.vue'
 import Registration from '../pages/Registration.vue'
 import TeacherDashboard from '../pages/dashboards/TeacherDashboard.vue'
 import StudentDashboard from '../pages/dashboards/StudentDashboard.vue'
+import ForgotPassword from '../pages/ForgotPassword.vue'
+import SignUp from '../pages/SignUp.vue'
 import component from 'element-plus/es/components/tree-select/src/tree-select-option.mjs'
+import SignIn from '../pages/SignIn.vue'
 
 
 const routes = [
   { path: '/', component: TeachHelper, meta: { guest: true } },
+  { path: '/signup', component: SignUp, meta: { guest: true } },
+  { path: '/signin', component: SignIn, meta: { guest: true } },
   { path: '/login', component: Login, meta: { guest: true } },
   { path: '/registration', component: Registration, meta: { guest: true } },
+  { path: '/forgot_password', component: ForgotPassword, meta: {guest: true}},
 
    // защищённые маршруты
   { path: '/teacher-dashboard', component: TeacherDashboard, meta: { requiresAuth: true } },

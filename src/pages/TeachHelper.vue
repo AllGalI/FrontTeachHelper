@@ -1,6 +1,9 @@
+<script setup>
+</script>
+
 <template>
   <div class="teach-helper-app">
-    <!-- <header class="header">
+    <header class="header">
       <div class="header-logo">
         <svg class="header-logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
           <path d="M9 16.172l-4.172-4.172-1.414 1.414L9 19 21 7l-1.414-1.414z"/>
@@ -14,7 +17,7 @@
         <a href="#" class="header-nav-link">Contact</a>
       </nav>
       <button class="header-signup-btn">Sign Up</button>
-    </header> -->
+    </header>
 
     <main class="main-content">
       <div class="main-text-block">
@@ -26,35 +29,14 @@
   </div>
 </template>
 
-<script>
-// Используем Composition API (setup) - современный стандарт для Vue 3
-export default {
-  name: 'TeachHelper',
-  setup() {
-    // Функция для кнопки "Get Started"
-    const getStarted = () => {
-      alert('Начинаем работу с Teach Helper!');
-      // В реальном приложении здесь будет логика роутинга или открытия модального окна
-    };
-
-    return {
-      getStarted
-      // Здесь можно добавить реактивные переменные (ref, reactive)
-    };
-  }
-};
-</script>
 
 <style scoped>
-/* Стили, применённые только к этому компоненту */
-
 .teach-helper-app {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    /* ЗАГЛУШКА ФОНОВОЙ КАРТИНКИ: замените на вашу картинку */
     background: "src/assets/1200px-Elegant_Background-18.jpg";
-    font-family: 'Roboto', sans-serif; /* Предполагается, что шрифт подключен в index.html */
+    font-family: 'Roboto', sans-serif;
     color: #333;
 }
 

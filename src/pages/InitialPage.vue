@@ -1,6 +1,5 @@
 <script scoped>
-import AppHeader from "@/components/AppHeader.vue"
-
+import AppHeader from '../components/AppHeader.vue';
 </script>
 
 <template>
@@ -8,7 +7,6 @@ import AppHeader from "@/components/AppHeader.vue"
 		<AppHeader />
 	</div>
 	<div class='container'>
-		<!-- <router-view /> -->
 			<div class="agitation_block">
 				<div class="roboto h1">Simplify Your Teaching with Teach Helper</div>
 				<div class="roboto h2">The ultimate tool for teachers to check homework efficiently and accurately</div>
