@@ -1,44 +1,52 @@
 <script setup>
 import { ref } from 'vue'
-import axios from 'axios'
-import qs from 'qs'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '../stores/store_user.js'
 
 
+const router = useRouter()
 
 const email = ref('')
 const password = ref('')
-const store = useUserStore()
-const router = useRouter()
 const baseURL = import.meta.env.VITE_API_BASE_URL
-
 
 
 
 async function handleLogin() {
 	try {
-		const res = await axios.post(
-			`${baseURL}/auth/login`,
-			qs.stringify({
-				username: email.value,
-				password: password.value
-			}),
-			{
-				headers: {
-				'Content-Type': 'application/x-www-form-urlencoded'
-				}
-			}
+		let response = await fetch(`${baseURL}/auth/login`, {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: JSON.stringify({
+          "username": email.value,
+          "password": password.value
+        })
+      }
 		)
 
-		store.setToken(res.data.access_token)
-		await store.fetchUser()
+    data = await response.json()
+    console.log(data)
 
-		if (store.user.role === 'teacher') {
-			router.push('/teacher-dashboard')
-		} else {
-			router.push('/student-dashboard')
-		}
+    response = await fetch(`${baseURL}/auth/me`, {
+      method: 'GET',
+      headers: {
+        'Athorization': data.token
+      },
+    })
+
+    // data = await response.json()
+    // console.log(data)
+
+
+		
+
+		// if (store.user.role === 'teacher') {
+		// 	router.push('/teacher-dashboard')
+		// } else {
+		// 	router.push('/student-dashboard')
+		// }
 
 	} catch (err) {
 		console.error('Ошибка входа', err)

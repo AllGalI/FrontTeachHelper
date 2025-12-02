@@ -1,5 +1,59 @@
 <script setup>
+  import { ref } from 'vue';
+  import { useRouter } from 'vue-router'
 
+  const router = useRouter()
+
+  const e_field = ref('')
+  const p_field = ref('')
+  const userType = ref('')
+
+  const message = ref('')
+  const loading = ref(false)
+
+  async function signUp(event) {
+    if (!event.target.checkValidity()) return;
+
+    message.value = ''
+    loading.value = true
+  
+    try {
+      const baseURL = import.meta.env.VITE_API_BASE_URL
+
+      const response = await fetch(baseURL + "/auth/register", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "email": e_field.value,
+          "password": p_field.value,
+          "role": userType.value
+          })
+      })
+      
+      const data = await response.json()
+
+      if (response.ok) {
+        setTimeout(() => {
+            router.push("/validate_email")
+          },1000
+        )
+      } else {
+        if (response.status == 422) {
+          message.value = data.detail[0].msg
+        }
+        else {
+          message.value = data.detail || 'Что-то пошло не так'
+        }
+      }
+    } catch (err) {
+      message.value = 'Не удалось соединиться с сервером. Проверьте интернет.'
+      console.error(err)
+    } finally {
+      loading.value = false
+    }
+  }
 </script>
 
 <template>
@@ -12,23 +66,18 @@
 				<span>Already have an account?</span>
 				<RouterLink to="/signin" class="signinButton">Sign in →</RouterLink> 
 			</div>
-			<form class="reg_card">
+			<form @submit.prevent="signUp" class="reg_card">
 				<h2>Sign up for TeachHelper</h2>
-				<button class="oauth2Button">
-					<img class="oauth2ButtonImage" src="@/assets/gmail.jpg" alt="gmail">
-					Continue with Google
-				</button>
-				<button class="oauth2Button">
-					<img class="oauth2ButtonImage" src="@/assets/mail.jpg" alt="mail">
-					Continue with Mail
-				</button>
-				<div class="authentication-divider">or</div>
+
 				<label for="email">Email</label>
-				<input type="email" class="reg_card_field" name="email" placeholder="Email" required>
+				<input v-model="e_field" type="email" class="reg_card_field" placeholder="Email" required>
+
 				<label for="password">Password</label>
-				<input type="password" class="reg_card_field" name="password" placeholder="Password" required>
+				<input v-model="p_field" type="password" class="reg_card_field" name="password" placeholder="Password" required>
+
 				<label for="userType">Who are you?</label>
 				<select 
+            v-model="userType"
 						id="user-type-select" 
 						name="userType" 
 						class="reg_card_field" 
@@ -39,8 +88,15 @@
 						<option value="teacher">Teacher</option>
 						<option value="student">Student</option>
 				</select>
+        <!-- <button @submit="signUp" class="oauth2Button submitButton">Sign Up</button> -->
+				<input 
+          type="submit"
+          class="oauth2Button submitButton"
+          value="Sign Up"
+          :disabled="loading"
+          >
 
-				<input type="submit" class="oauth2Button submitButton" value="Sign Up">
+        <div v-if="message">{{ message }}</div>
 			</form>
 		</div>
 	</div>

@@ -1,27 +1,76 @@
 <script setup>
+  import { ref } from 'vue';
+  import { useRouter } from 'vue-router';
+
+  const email = ref('')
+  const password = ref('')
+
+  const message = ref('')
+  const loading = ref(false)
+
+  const baseURL = import.meta.env.VITE_API_BASE_URL
+  const router = useRouter()
+  async function signIn() {
+    message.value = ''
+    loading.value = true
+
+    try {
+      console.log
+      const formData = new URLSearchParams();
+      formData.append('username', email.value);
+      formData.append('password', password.value);
+      console.log(formData.toString())
+
+      const response = await fetch(baseURL + "/auth/login", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: formData.toString()
+      })
+
+      const data = await response.json()
+      console.log(data)
+      localStorage.setItem('authToken', data.token)
+
+      if (response.ok) {
+        setTimeout(() => {
+            router.push('/')
+          }, 500
+        )
+      }
+
+    } catch (err) {
+      message.value = 'Не удалось соединиться с сервером. Проверьте интернет.'
+      console.error(err)
+    } finally {
+      loading.value = false
+    }
+  }
+
 </script>
 
 <template>
 	<div class="signinPage">
 		<span class="formHeader">Sign in to TextHelper</span>
-		<form action="" class="signInForm">
+		<form @submit.prevent="signIn" class="signInForm">
 			<label class="placeholder" for="email">Email</label>
-			<input type="email" name="email" class="reg_card_field">
+			<input v-model="email" type="email" name="email" class="reg_card_field" required>
 			<label class="formRow placeholder" for="password">
 				<span>Password</span>
-				<RouterLink class="forgotLink" to="/password_reset">Forgot password?</RouterLink>
+				<RouterLink class="forgotLink" to="/forgot_password">Forgot password?</RouterLink>
 			</label>
-			<input type="password" name="password" class="reg_card_field">
-			<RouterLink class="placeholder oauth2Button sinInButton ">Sign in</RouterLink>
-			<div class="authentication-divider">or</div>
-			<button class="oauth2Button">
+			<input v-model="password" type="password" name="password" class="reg_card_field" required>
+			<button class="placeholder oauth2Button sinInButton" :disabled="loading">Sign in</button>
+			<!-- <div class="authentication-divider">or</div> -->
+			<!-- <button class="oauth2Button">
 				<img class="oauth2ButtonImage" src="@/assets/gmail.jpg" alt="gmail">
 				Continue with Google
 			</button>
 			<button class="oauth2Button">
 				<img class="oauth2ButtonImage" src="@/assets/mail.jpg" alt="mail">
 				Continue with Mail
-			</button>
+			</button> -->
 			<div class="row placeholder signinRow">
 				<span>New to TextHelper?</span>
 				<RouterLink class="forgotLink" to="/signup">Create an account</RouterLink>

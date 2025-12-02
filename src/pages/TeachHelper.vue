@@ -1,4 +1,9 @@
 <script setup>
+  import { useRouter } from 'vue-router';
+  
+  const router = useRouter()
+  const token = localStorage.getItem('authToken')
+
 </script>
 
 <template>
@@ -16,14 +21,14 @@
         <a href="#" class="header-nav-link">Pricing</a>
         <a href="#" class="header-nav-link">Contact</a>
       </nav>
-      <button class="header-signup-btn">Sign Up</button>
+      <button @click="router.push('/signup')" class="header-signup-btn">Sign Up</button>
     </header>
 
     <main class="main-content">
       <div class="main-text-block">
         <h1 class="main-title">Simplify Your Teaching with Teach Helper</h1>
         <p class="main-subtitle">The ultimate tool for teachers to check homework efficiently and accurately</p>
-        <button class="main-cta-btn" @click="getStarted">Get Started</button>
+        <button class="main-cta-btn" @click="router.push('/signup')">Get Started</button>
       </div>
     </main>
   </div>

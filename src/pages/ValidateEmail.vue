@@ -1,6 +1,6 @@
 <script setup>
   import { ref } from 'vue';
-  import { useRouter } from 'vue-router'
+  import { RouterView, useRouter } from 'vue-router'
 
 
   const router = useRouter()
@@ -18,7 +18,7 @@
     loading.value = true
 
     try {
-      const response = await fetch(baseURL + '/auth/forgot_password', {
+      const response = await fetch(baseURL + '/auth/send_code', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf-8'
@@ -33,8 +33,8 @@
         error.value = false
 
         setTimeout(() => {
-          router.push('/login')
-        }, 3000)
+          router.push('/')
+        }, 500)
       } else {
         if (response.status == 422) {
           message.value = data.detail[0].msg
@@ -57,16 +57,16 @@
 
 <template>
   <div class="forgotPage">
-    <div class="card">
+    <form @submit.prevent="sendResetEmail" class="card">
       <img src="@/assets/logo.svg" alt="logo">
-      <h1>Reset your password</h1>
+      <h1>Send verification link</h1>
       <p>Enter your user account's verified email address and we will send you a password reset link.</p>
-
-      <input 
+      <input
         v-model="email" 
+        type="email"
         class="emailField" 
         placeholder="Enter your email address"
-        :disabled="loading"
+        required
       >
 
       <!-- Сообщение об успехе/ошибке -->
@@ -81,7 +81,7 @@
       >
         {{ loading ? 'Отправляем...' : 'Send password reset email' }}
       </button>
-    </div>
+    </form>
   </div>
 </template>
 
@@ -175,4 +175,4 @@ p {
 
 </style>
 
-<!-- https://www.freeconvert.com/svg-converter/download -->     
+<!-- https://www.freeconvert.com/svg-converter/download -->      
