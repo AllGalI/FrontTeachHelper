@@ -15,11 +15,9 @@
     loading.value = true
 
     try {
-      console.log
       const formData = new URLSearchParams();
       formData.append('username', email.value);
       formData.append('password', password.value);
-      console.log(formData.toString())
 
       const response = await fetch(baseURL + "/auth/login", {
         method: 'POST',
@@ -30,14 +28,21 @@
       })
 
       const data = await response.json()
-      console.log(data)
-      localStorage.setItem('authToken', data.token)
 
       if (response.ok) {
+        localStorage.setItem('authToken', data.token)
+
         setTimeout(() => {
             router.push('/')
           }, 500
         )
+      } else {
+        if (response.status == 422) {
+          message.value = data.detail[0].msg
+        }
+        else {
+          message.value = data.detail || 'Что-то пошло не так'
+        }
       }
 
     } catch (err) {
@@ -75,7 +80,8 @@
 				<span>New to TextHelper?</span>
 				<RouterLink class="forgotLink" to="/signup">Create an account</RouterLink>
 			</div>
-			
+      <span v-if="message">{{ message }}</span>
+
 			
 		</form>
 	</div>
