@@ -1,90 +1,40 @@
 <script setup>
-  import { onUnmounted, ref, useTemplateRef } from 'vue';
+  import Footer from './components/Footer.vue';
 
-  const isOpen = ref(false);
-
-  const menu = useTemplateRef('menuRef');
-  const menuItems = ref([
-    {
-      'text': "About",
-      "route": "/about"
-    },
-    {
-      'text': "Billings",
-      "route": "/billings"
-    },
-    {
-      'text': "Login",
-      "route": "/login"
-    }
-  ])
-
-  function toggleMenu() {
-    isOpen.value = !isOpen.value;
-  }
-
-  // function 
-
-  function closeOnOutsideClick(event) {
-    if (
-      isOpen.value
-      && !menu.value.contains(event.target)
-    ) {
-      isOpen.value = false;
-    }
-  }
-
-  document.addEventListener('click', closeOnOutsideClick);
-
-  onUnmounted(() => {
-    document.removeEventListener('click', closeOnOutsideClick);
-  })
-
+  const firstPay = 99
 </script>
 
 <template>
   <div class="app" id="app">
-    <nav
-      class="menu"
-      :class="{'menu--open': isOpen}"
-    >
-      <ul
-        class="menu__list"
-        ref="menuRef"
-      >
-        <li
-          class="menu__item"
-          v-for="item in menuItems"> {{ item.text }}
-        </li>
-      </ul>
-    </nav>
-    <footer class="nav nav__bottom">
-      <div class="nav__bar" >
-        <div class="nav__logo">
-          <img src="@/assets/logo.svg" alt="logo" class="logo">
-          <div class="logo__text">Teach Helper</div>
-        </div>
-        <button 
-          @click.stop="toggleMenu"
-          class="hamburger__button"
-          ref="menuButton"
-        >
-          <div 
-            class="hamburger__container"
-            :class="{'hamburger__container--open': isOpen}"
-          >
-            <div class="hamburger__item-top"></div>
-            <div class="hamburger__item-middle"></div>
-            <div class="hamburger__item-bottom"></div>
-          </div>
-        </button>        
-      </div>
-    </footer>
+    <div class="banner">
+      <h1>Платформа для помощи учителям</h1>
+      <p>Помогаем сохранить ваше время</p>
+      <button>
+        Зарегистрироваться
+      </button>
+      <p>Первый месяц за {{ firstPay }} ₽</p>
+
+      <p>AI помошник для проверки заданий</p>
+
+    </div>
+    <Footer />
   </div>
 </template>
 
 <style>
 
+.banner {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 5px;
+
+  padding: 8px;
+  
+  background-image: url("src/assets/1200px-Elegant_Background-18.jpg");
+  background-position: center;
+  background-size: cover;
+}
 
 
 </style>
