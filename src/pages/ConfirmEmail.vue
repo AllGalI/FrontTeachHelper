@@ -1,6 +1,6 @@
 <script setup>
   import { ref } from 'vue';
-  import { useRouter, useRoute, RouterLink} from 'vue-router'
+  import { useRouter, RouterLink} from 'vue-router'
 
 
   const router = useRouter()
