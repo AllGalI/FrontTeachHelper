@@ -1,16 +1,51 @@
 <script setup>
-  import { ref } from 'vue';
+  import { reactive, ref } from 'vue';
   import { useRouter } from 'vue-router';
 
-  const email = ref('')
-  const password = ref('')
-
-  const message = ref('')
-  const loading = ref(false)
-
-  const baseURL = import.meta.env.VITE_API_BASE_URL
   const router = useRouter()
+  const password_field = ref(null)
+  const passwordHidden = ref(true)
+  const baseURL = import.meta.env.VITE_API_BASE_URL
+
+  const form = reactive({
+    email: '',
+    password: '',
+  })
+  
+  const errors = reactive({
+    email: '',
+    password: ''
+  })
+
+  function togglePassword() {
+    passwordHidden.value = !passwordHidden.value
+    password_field.value.type = passwordHidden.value? 'password': 'text'
+    console.log(password_field.type)
+  }
+
+  function validate() {
+    let isValid = true
+
+    Object.keys(errors).forEach(key => {
+      errors[key] = ''
+    });
+
+    if (!form.email) {
+      errors.email = 'Заполните почту'
+      isValid = false
+    }
+
+    if (!form.email) {
+      errors.email = 'Введите пароль'
+      isValid = false
+    }
+
+    return isValid
+  }
+
   async function signIn() {
+    if (!validate) return
+
     message.value = ''
     loading.value = true
 
@@ -56,39 +91,63 @@
 </script>
 
 <template>
-	<div class="signinPage">
-		<span class="formHeader">Sign in to TextHelper</span>
-		<form @submit.prevent="signIn" class="signInForm">
-			<label class="placeholder" for="email">Email</label>
-			<input v-model="email" type="email" name="email" class="reg_card_field" required>
-			<label class="formRow placeholder" for="password">
-				<span>Password</span>
-				<RouterLink class="forgotLink" to="/forgot_password">Forgot password?</RouterLink>
-			</label>
-			<input v-model="password" type="password" name="password" class="reg_card_field" required>
-			<button class="placeholder oauth2Button sinInButton" :disabled="loading">Sign in</button>
-			<!-- <div class="authentication-divider">or</div> -->
-			<!-- <button class="oauth2Button">
-				<img class="oauth2ButtonImage" src="@/assets/gmail.jpg" alt="gmail">
-				Continue with Google
-			</button>
-			<button class="oauth2Button">
-				<img class="oauth2ButtonImage" src="@/assets/mail.jpg" alt="mail">
-				Continue with Mail
-			</button> -->
-			<div class="row placeholder signinRow">
-				<span>New to TextHelper?</span>
-				<RouterLink class="forgotLink" to="/signup">Create an account</RouterLink>
-			</div>
-      <span v-if="message">{{ message }}</span>
+	<div class="page">
+    <div class="page__card">
+      <h1 class="page__title">Sign in to TextHelper</h1>
+      <form class="page__form" action="">
+        <div class="page__field">
+          <label class="page__label" for="email">Email</label>
+          <input v-model="form.email" class="page__input" type="email" id="email" placeholder="example@mail.ru">
+        </div>
+        <div class="page__field">
+          <label class="page__label" for="email">Password</label>
+          <div class="password_box">
+            <input v-model="form.password" class="page__input" type="password" id="password" placeholder="password" ref="password_field">
+            <img 
+              class="icon" :src="passwordHidden? 'src/assets/icon-close-eye.png': 'src/assets/icon-eye.png'" 
+              @click.prevent="togglePassword"
+              alt="">
+          </div>
+        </div>
 
-			
-		</form>
+        <button @click.prevent="signIn" class="page__button" type="submit">
+          Войти 
+        </button>
+
+      </form>
+    </div>
 	</div>
 </template>
 
 
 <style scoped>
+  /* .password__icon {
+    height: 100%;
+    position: relative;
+    right: 12px;
+  } */
+  .page__input {
+    width: 100%;
+  }
+
+  .password_box {
+    width: 100%;
+    height: 44px;
+    position: relative;
+  }
+
+
+
+  .icon {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 18px;
+    width: 18px;
+  }
+
+
 
 .signinPage {
 	width: 100%;

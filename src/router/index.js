@@ -19,10 +19,11 @@ import HomePage from '../pages/HomePage.vue'
 const routes = [
   { path: '/', component: HomePage, meta: { guest: true } },
   { path: '/signup', component: SignUp, meta: { guest: true } },
-  { path: '/login', component: Login, meta: { guest: true } },
+  { path: '/signin', component: SignIn, meta: { guest: true } },
   { path: '/validate_email', component: ValidateEmail, meta: { guest: true } },
   { path: '/confirm_email', component: ConfirmEmail, meta: { guest: true } },
 
+  
   { path: '/registration', component: Registration, meta: { guest: true } },
   { path: '/forgot_password', component: ForgotPassword, meta: {guest: true}},
 

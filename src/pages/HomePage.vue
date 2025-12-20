@@ -46,9 +46,6 @@
 
     <section class="content-block content-block--alt">
       <h2 class="content-block__title">Всё под рукой</h2>
-      <div class="image-mockup">
-        <p>Интерфейс списка работ</p>
-      </div>
 
       <div class="grid-two-col">
         <div class="mini-card">
@@ -193,7 +190,7 @@
   }
 
   .feature-card {
-    background: var(--color-white);
+    background: var(--color-primary-bg);
     padding: 24px;
     border-radius: 20px;
     margin-bottom: 20px;
@@ -262,7 +259,7 @@
   }
 
   .mini-card {
-    background: white;
+    background: var(--color-primary-bg);
     padding: 15px;
     border-radius: 15px;
     h4 { margin: 0 0 5px 0; color: var(--color-accent-blue); }

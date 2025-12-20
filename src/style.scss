@@ -226,9 +226,138 @@ header {
   padding-bottom: calc(var(--header-height) + var(--spacing-s));
 
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   background-color: var(--color-primary-bg);
+
+  &__card {
+    width: 100%;
+    max-width: 360px;
+    background-color: var(--color-card-bg);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 8px 24px var(--color-badge-bg);
+
+  }
+
+  &__title {
+    margin-bottom: 8px;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--color-accent-blue);
+    text-align: center;
+  }
+
+  &__subtitle {
+    margin-bottom: 24px;
+    font-size: 14px;
+    color: var(--color-text-muted);
+    text-align: center;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  &__label {
+    font-size: 12px;
+    color: var(--color-accent-blue);
+  }
+
+  &__input {
+    height: 44px;
+    padding-left: 12px;
+    padding-right: 25px;
+    border-radius: 10px;
+    border: 1px solid var(--color-badge-bg);
+    font-size: 14px;
+    color: var(--color-accent-blue);
+    background-color: var(--color-white);
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-accent-blue);
+    }
+
+    &::placeholder {
+      color: var(--color-text-muted);
+    }
+  }
+
+  &__button {
+    margin-top: 8px;
+    height: 48px;
+    border-radius: 12px;
+    border: none;
+    background-color: var(--color-accent-orange);
+    color: var(--color-white);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 6px 16px var(--color-button-shadow);
+
+    &:active {
+      transform: translateY(1px);
+    }
+  }
+
+  &__footer {
+    margin-top: 20px;
+    font-size: 13px;
+    text-align: center;
+    color: var(--color-text-muted);
+  }
+
+  &__link {
+    color: var(--color-accent-blue);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  &__roles {
+    display: flex;
+    gap: 12px;
+  }
+
+  &__role {
+  flex: 1;
+  padding: 14px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--color-badge-bg);
+  background-color: var(--color-white);
+  text-align: left;
+  cursor: pointer;
+
+  &--active {
+    border-color: var(--color-accent-orange);
+    background-color: var(--color-badge-bg);
+  }
+  }
+
+  &__role-title {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-accent-blue);
+  }
+
+  &__role-desc {
+    display: block;
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--color-text-muted);
+  }
+
+
 }
 
 
