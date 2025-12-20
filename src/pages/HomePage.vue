@@ -8,154 +8,267 @@
 </script>
 
 <template>
-  <div class="column">
-    <div class="header2">
-      <img class="logo_home" src="@/assets/logo.svg" alt="logo">
+  <div class="homepage column">
+    <div class="header-local">
+      <img class="header-local__logo" src="@/assets/logo.svg" alt="logo">
     </div>
 
-    <div class="banner">
-      <h3>Платформа для помощи учителям</h3>
-      <p>Помогаем сохранить ваше время</p>
-      <button class="btn btn--rounded" @click="router.push('/signup')">
+    <section class="hero-section">
+      <div class="hero-section__badge">Первый месяц за {{ firstPay }} ₽</div>
+      <h1 class="hero-section__title">Платформа для помощи учителям</h1>
+      <p class="hero-section__subtitle">AI-помощник для мгновенной проверки заданий и экономии вашего времени</p>
+      <button class="hero-section__button" @click="router.push('/signup')">
         Зарегистрироваться
       </button>
-      <p>Первый месяц за {{ firstPay }} ₽</p>
+    </section>
 
-      <p>AI помошник для проверки заданий</p>
-    </div>
-    <div class="banner banner--main">
-      <h3>Платформа для помощи учителям</h3>
-      <p>Помогаем сохранить ваше время</p>
-      <button class="btn btn--rounded" @click="router.push('/signup')">
-        Зарегистрироваться
-      </button>
-      <p>Первый месяц за {{ firstPay }} ₽</p>
+    <section class="content-block">
+      <h2 class="content-block__title">Проверяйте работы с комфортом</h2>
+      
+      <div class="feature-card">
+        <h3 class="feature-card__title">Забудьте про мессенджеры</h3>
+        <p class="feature-card__text">Больше не нужно собирать сотни фото в WhatsApp. Все работы в одном структурированном окне.</p>
+        <div class="video-placeholder"><span>▶ Фото-демонстрация</span></div>
+      </div>
 
-      <p>AI помошник для проверки заданий</p>
-    </div>
-    <div class="banner">
-      <h1>Проверяйте работы с удобвствами</h1>
-      <div>
-        <h2>Больше не нужно пересылать фото в мессенджерах</h2>
-        <p>Проверяйте в одном месте</p>
-        <div>
-          Видео с тем как это делается
+      <div class="feature-card">
+        <h3 class="feature-card__title">Умная проверка ИИ</h3>
+        <p class="feature-card__text">ИИ сам найдёт ошибки, выделит их и предложит комментарий. Вам остаётся только утвердить результат.</p>
+        <div class="video-placeholder"><span>▶ Как работает AI</span></div>
+      </div>
+
+      <div class="feature-card">
+        <h3 class="feature-card__title">Проверяйте сочинения по готовым критериям либо отдайте работу на проверку ИИ</h3>
+        <p class="feature-card__text">Вы выбираете тип работы, а TeachHelper подставляет официальные критерии. Остаётся только выставить баллы и добавить комментарии - результат считается автоматически и прозрачен для ученика и родителя.</p>
+        <div class="video-placeholder"><span>▶ Как работает AI</span></div>
+      </div>
+    </section>
+
+    <section class="content-block content-block--alt">
+      <h2 class="content-block__title">Всё под рукой</h2>
+      <div class="image-mockup">
+        <p>Интерфейс списка работ</p>
+      </div>
+
+      <div class="grid-two-col">
+        <div class="mini-card">
+          <h4>Ученики</h4>
+          <p>Группируйте детей по классам и уровням</p>
+        </div>
+        <div class="mini-card">
+          <h4>Статистика</h4>
+          <p>Автоматические отчеты по успеваемости</p>
         </div>
       </div>
-      <div>
-        <h2>Проверяйте сочинения по готовым критериям либо отдайте работу на проверку ИИ</h2>
-        <p>Вы выбираете тип работы, а TeachHelper подставляет официальные критерии. Остаётся только выставить баллы и добавить комментарии - результат считается автоматически и прозрачен для ученика и родителя.</p>
-        <div>
-          Видео с тем как это делается
-        </div>
+    </section>
+
+    <section class="pricing-banner">
+      <h2 class="pricing-banner__title">Один сервис вместо десяти</h2>
+      <div class="service-tags">
+        <span>GDocs</span> <span>GDrive</span> <span>Forms</span> <span>Word</span> <span>Excel</span>  <span>ChatGPT</span> <span>Telegram</span> <span>Яндекс Диск</span> <span>Paint</span> <span>WhatsApp</span>
       </div>
-      <div>
-        <h2>Либо отдайте работу на проверку ИИ</h2>
-        <p>Отправте работу на проверку, а ИИ сам найдёт ошибки выделит их и напишет комментарии к ошибкам</p>
-        <div>
-          Видео с тем как это делается
-        </div>
-      </div>
-    </div>
-    <div class="banner">
-      <h1>Храните материалы для заданий в одном месте</h1>
-      <div>
-        Фото с примером(На нём скрин списка работ и детальной работы)
-      </div>
-      <div>
-        <div>
-          <h2>Ученики</h2>
-          <p>Распределяйте их по группам</p>
-          <div>Фото пример</div>
-        </div>
-        <div>
-          <h2>Ученики</h2>
-          <p>Распределяйте их по группам</p>
-          <div>Фото пример</div>
-        </div>
-        <div>
-          <h2>Статистика учеников</h2>
-          <p>Данные с успеваемостью ваших учеников автоматически генерируются в таблицы</p>
-          <p>Следите за прогрессом ваших детей</p>
-          <div>Фото пример</div>
-        </div>
-      </div>
-    </div>
-    <div>
-      <h1>Заменим много сервисов</h1>
-      <p>на один за 899 руб/месяц</p>
-      <div>GDocs GDrive Яндекс.Диск GForms Paint GClass Word Excel ChatGPT</div>
-      <!-- <p>«Больше никаких pdf в гугл-диске, тестов в гугл-формах и закладок в браузере. Теперь всё хранится на одной платформе»</p> -->
-    </div>
-    <!-- <div>
-      <h1>Выберете свою версию</h1>
-      <div class="row">
-        <div class="column">
-          <h2>Репетитору/Учителю</h2>
-          <ul>
-            <li>— Безлимитное облачное хранилище</li>
-            <li>— Создание групп и распределение учеников</li>
-            <li>— Проверка работ по фото, тексту, аудио</li>
-            <li>— Автоматический подсчет баллов по критериям-- Безлимитное кол-во учеников</li>
-          </ul>
-        </div>
-        <div class="column"></div>
-          <h2>Корпоративная версия</h2>
-          <ul>
-            <li>— Онлайн-школам, репетиторским центрам</li>
-            <li>— Встраивается в любую обучающую платформу</li>
-            <li>— Многократно ускоряет работу проверяющих</li>
-            <li>— Добавляйте сотрудников и контролируйте их  </li>
-            <li>— Вся методическая работа в одном месте</li>
-            Бесплатно обучим ваших сотрудников
-            Бессрочный демо-период
-          </ul>
-      </div>
-    </div> -->
-</div>
+      <p class="pricing-banner__price">Всего за 899 руб/месяц</p>
+      <button class="hero-section__button" @click="router.push('/signup')">Начать сейчас</button>
+    </section>
+  </div>
 </template>
 
 <style lang="scss">
 
-  .banner {
-    width: 100%;
+
+  .homepage {
     height: 100%;
-    border: none;
-    border-radius: 5px;
+    width: 100%;
+    display: flex;
+  	flex-direction: column;
+    margin: auto;
+    margin-bottom: 70px;
+    padding: var(--spacing-m);
+    padding-top: var(--app-padding-top);
 
-    padding: 8px;
-    
-    background-position: center;
-    background-size: cover;
-
-    
-    &--main {
-      min-height: 100vh;
-      background: linear-gradient(
-        var(--primary), var(--secondary)
-      );
-    }
   }
 
 
-
-  .header2 {
+  .header-local {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     height: var(--app-padding-top);
-    background-color: white;
-  }
-  .logo_home {
-    position: absolute;
-    top: 5px;
-    right: 50%;
-    height: 50px;
-    width: 50px;
 
-    transform: translateX(50%);
+    &__logo {
+      position: absolute;
+      top: 5px;
+      right: 50%;
+      height: 50px;
+      width: 50px;
+
+      transform: translateX(50%);
+    }
   }
+
+  .hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 48px 24px;
+    
+    background-color: var(--color-primary-bg);
+    border-radius: 32px;
+    font-family: 'Inter', -apple-system, sans-serif;
+
+    &__badge {
+      display: inline-block;
+      padding: 8px 16px;
+      margin-bottom: 20px;
+      
+      background-color: var(--color-badge-bg);
+      color: var(--color-accent-blue);
+      
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    &__title {
+      margin: 0 0 16px 0;
+      
+      color: var(--color-accent-blue);
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    &__subtitle {
+      margin: 0 0 32px 0;
+      
+      color: var(--color-text-muted);
+      font-size: 18px;
+      line-height: 1.4;
+    }
+
+    &__button {
+      width: 100%;
+      padding: 18px;
+      
+      background-color: var(--color-accent-orange);
+      color: #ffffff;
+      
+      border: none;
+      border-radius: 16px;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      
+      /* Плавность для UX */
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 8px 20px var(--color-button-shadow);
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px var(--color-button-shadow);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+  }
+
+  .content-block {
+    padding: 40px 20px;
+    
+    &__title {
+      color: var(--color-accent-blue);
+      font-size: 24px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+  }
+
+  .feature-card {
+    background: var(--color-white);
+    padding: 24px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(26, 35, 126, 0.05);
+
+    &__title {
+      color: var(--color-accent-blue);
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    &__text {
+      color: var(--color-text-muted);
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+  }
+
+  .video-placeholder {
+    background: #f0f4f8;
+    height: 160px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-accent-blue);
+    font-weight: 600;
+    border: 1px dashed var(--color-badge-bg);
+  }
+
+  .service-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin: 20px 0;
+    
+    span {
+      background: var(--color-badge-bg);
+      // color: var(--color-accent-blue);
+      color:white;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+  }
+
+  .pricing-banner {
+    background: var(--color-accent-blue);
+    color: white;
+    margin: 20px;
+    padding: 40px 24px;
+    border-radius: 24px;
+    text-align: center;
+
+    &__title { font-size: 22px; margin-bottom: 10px; }
+    &__price { font-size: 28px; font-weight: 800; margin: 20px 0; }
+  }
+
+  .grid-two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+
+  .mini-card {
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+    h4 { margin: 0 0 5px 0; color: var(--color-accent-blue); }
+    p { font-size: 12px; color: var(--color-text-muted); margin: 0; }
+  }
+   
 
 
 
@@ -174,3 +287,43 @@
     background-color: var(--secondary);
   }
 </style>
+
+
+<!-- 
+<script setup>
+  import { ref } from 'vue';
+  import { useRouter} from 'vue-router'
+
+  const router = useRouter()
+  const firstPay = 99
+
+</script>
+
+<template>
+  <div class="column">
+    <header class="header">
+      <img class="logo-home" src="@/assets/logo.svg" alt="Teach Helper Logo">
+    </header>
+
+
+  </div>
+</template>
+<style lang="scss">
+
+
+
+
+  .column {
+    background-color: #f8fbff; /* Очень светлый фон для всей страницы */
+    min-height: 100vh;
+  }
+
+  .header {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    .logo-home { height: 40px; }
+  }
+
+
+</style> -->

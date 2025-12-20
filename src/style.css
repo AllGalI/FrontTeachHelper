@@ -1,25 +1,12 @@
+@charset "UTF-8";
 * {
   box-sizing: border-box;
   text-decoration: none;
 }
 
 body {
-  width: 100%;
   margin: 0;
-  overflow: hidden;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-  overflow-y: auto;
-}
-
-#app {
-  max-width: 1440px;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-  padding: var(--spacing-m);
-  padding-top: var(--app-padding-top);
 }
 
 header {
@@ -29,7 +16,7 @@ header {
   z-index: 100;
   left: 0;
   right: 0;
-  border: 1px solid var(--divider-light-1);
+  border: 1px solid var(--color-divider-light-1);
   background-color: white;
 }
 
@@ -152,7 +139,7 @@ header {
   flex-direction: column;
   justify-content: center;
   text-decoration: none;
-  border-bottom: 1px solid var(--divider-light-1);
+  border-bottom: 1px solid var(--color-divider-light-1);
   list-style: none;
   margin: var(--spacing-xs) var(--spacing-l);
   transition: transform 0.4s;
@@ -181,6 +168,30 @@ header {
   border: none;
 }
 
+.page {
+  min-height: 100vh;
+  padding: 16px;
+  padding-bottom: calc(var(--header-height) + var(--spacing-s));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-primary-bg);
+}
+
+.btn {
+  width: 100%;
+  padding: 18px;
+  background-color: var(--color-accent-orange);
+  color: #ffffff;
+  border: none;
+  border-radius: 16px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 8px 20px var(--color-button-shadow);
+}
+
 .row {
   width: 100%;
   display: flex;
@@ -203,14 +214,23 @@ header {
 }
 
 :root {
-  --divider-light-1: #3c3c3c1f;
-  --primary: #055cce;
-  --primary-dark: #10457f;
-  --secondary: #79b45b;
+  --color-divider-light-1: #3c3c3c1f;
   --c-text: white;
   --header-height: 55px;
   --app-padding-top: 110px;
   --logo-height: 24px;
+  --primary: #055cce;
+  --primary-dark: #10457f;
+  --secondary: #79b45b;
+  --color-primary-bg: #E3F2FDFF; /* Небесный фон */
+  --color-accent-blue: #1A237EFF; /* Индиго для текста */
+  --color-accent-orange: #FF6D00FF; /* Оранжевый для кнопки */
+  --color-white: #ffffff;
+  --color-card-bg: #ffffff;
+  /* Вспомогательные цвета с прозрачностью */
+  --color-badge-bg: #1A237E1F; /* Индиго 12% */
+  --color-text-muted: #1A237E99; /* Индиго 60% */
+  --color-button-shadow: #FF6D0066; /* Оранжевый 40% */
   --spacing-xs: 4px;
   --spacing-s: 8px;
   --spacing-m: 16px;

@@ -72,7 +72,7 @@
         </div>
         <div class="nav__content">
           <button @click="router.push('/login')" class="text_btn">
-            SignIn
+            Войти
           </button>
           <button 
             @click.stop="toggleMenu"
