@@ -1,123 +1,3 @@
-<template>
-  <div class="alert" :class="{ 'alert--show': registered }">
-    <h3>На вашу почту отпралено сообщение</h3>
-    <p>Подтвердите вашу почту</p>
-    <button @click="router.push('/signin')" class="btn">ok</button>
-  </div>
-
-  <div class="alert" :class="{ 'alert--show': request_error }">
-    <p>{{ server_error }}</p>
-    <button @click="request_error = false" class="btn">ok</button>
-  </div>
-  
-  <div class="page" :class="{ 'no-click': registered | request_error}">
-    <div class="page__card">
-      <h1 class="page__title">Регистрация</h1>
-      <p class="page__subtitle">
-        Создайте аккаунт, используя электронную почту
-      </p>
-
-      <form class="page__form" @submit.prevent="onSubmit">
-        <div class="page__field">
-          <label class="page__label" for="email">Email</label>
-          <input
-            id="email"
-            v-model="form.email"
-            type="email"
-            class="page__input"
-            placeholder="example@mail.com"
-            required
-          />
-        </div>
-
-        <div class="page__field">
-          <label class="page__label" for="first_name">Имя</label>
-          <input
-            id="first_name"
-            v-model="form.first_name"
-            class="page__input"
-            placeholder="Имя"
-            required
-          />
-        </div>
-
-        <div class="page__field">
-          <label class="page__label" for="last_name">Фамилия</label>
-          <input
-            id="last_name"
-            v-model="form.last_name"
-            class="page__input"
-            placeholder="Фамилия"
-            required
-          />
-        </div>
-        
-
-        <div class="page__field">
-          <label class="page__label" for="password">Пароль</label>
-          <input
-            id="password"
-            v-model="form.password"
-            type="password"
-            class="page__input"
-            placeholder="Минимум 8 символов"
-            required
-          />
-        </div>
-
-        <div class="page__field">
-          <label class="page__label" for="passwordConfirm">
-            Повторите пароль
-          </label>
-          <input
-            id="passwordConfirm"
-            v-model="form.passwordConfirm"
-            type="password"
-            class="page__input"
-            required
-          />
-        </div>
-
-        <div class="page__field">
-          <div class="page__roles">
-            <button
-              type="button"
-              class="page__role"
-              :class="{ 'page__role--active': form.role === 'student' }"
-              @click="form.role = 'student'"
-            >
-              <span class="page__role-title">Ученик</span>
-              <span class="page__role-desc">Готовлюсь к экзаменам</span>
-            </button>
-
-            <button
-              type="button"
-              class="page__role"
-              :class="{ 'page__role--active': form.role === 'teacher' }"
-              @click="form.role = 'teacher'"
-            >
-              <span class="page__role-title">Учитель</span>
-              <span class="page__role-desc">Создаю и веду занятия</span>
-            </button>
-          </div>
-          <span v-if="errors.role" class="error_text">
-            {{ errors.role }}
-          </span>
-        </div>
-
-        <button class="page__button" type="submit">
-          Зарегистрироваться
-        </button>
-      </form>
-
-      <p class="page__footer">
-        Уже есть аккаунт?
-        <a href="#" @click="router.push('/signin')" class="page__link">Войти</a>
-      </p>
-    </div>
-  </div>
-</template>
-
 <script setup>
   import { reactive, ref } from 'vue'
   import { useRouter } from 'vue-router';
@@ -125,7 +5,6 @@
 
   const router = useRouter()
   const registered = ref(false)
-  const request_error = ref(false)
   const server_error = ref('')
   const baseURL = import.meta.env.VITE_API_BASE_URL
 
@@ -202,8 +81,8 @@
   }
 
   async function onSubmit () {
+    if (!validate()) return
     try {
-      if (!validate()) return
 
       const response = await fetch(baseURL + "/auth/register", {
         method: 'POST',
@@ -220,22 +99,145 @@
       })
 
       const data = await response.json()
-      console.log(data)
-      
+
       if (response.status == 200) {
         registered.value = true
       }
+      else if (response.status == 409) {
+        router.push('/confirm_email?email=' + form.email)
+      }
       else {
-        request_error.value = true
         server_error.value = data.detail
-        console.log(data)
       }
     } catch (error) {
-        request_error.value = true
         server_error.value = 'Не удалось подключиться к серверу, проверьте соединение или попробуйте позже'
     }
   }
 </script>
+
+
+<template>
+  <div class="alert" :class="{ 'alert--show': registered }">
+    <h3>На вашу почту отпралено сообщение</h3>
+    <p>Подтвердите вашу почту</p>
+    <button @click="router.push('/signin')" class="btn">ok</button>
+  </div>
+
+  <div class="alert" :class="{ 'alert--show': server_error.length != 0 }">
+    <p>{{ server_error }}</p>
+    <button @click="server_error = ''" class="btn">ok</button>
+  </div>
+  
+  <div class="page" :class="{ 'no-click': registered | server_error.length != 0}">
+    <div class="page__card">
+      <h1 class="page__title">Регистрация</h1>
+      <p class="page__subtitle">
+        Создайте аккаунт, используя электронную почту
+      </p>
+
+      <form class="page__form" @submit.prevent="onSubmit">
+        <div class="page__field">
+          <label class="page__label" for="email">Email</label>
+          <input
+            id="email"
+            v-model="form.email"
+            type="email"
+            class="page__input"
+            placeholder="example@mail.com"
+            required
+          />
+        </div>
+
+        <div class="page__field">
+          <label class="page__label" for="first_name">Имя</label>
+          <input
+            id="first_name"
+            v-model="form.first_name"
+            class="page__input"
+            placeholder="Имя"
+            required
+          />
+        </div>
+
+        <div class="page__field">
+          <label class="page__label" for="last_name">Фамилия</label>
+          <input
+            id="last_name"
+            v-model="form.last_name"
+            class="page__input"
+            placeholder="Фамилия"
+            required
+          />
+        </div>
+        
+
+        <div class="page__field">
+          <label class="page__label" for="password">Пароль</label>
+          <input
+            id="password"
+            v-model="form.password"
+            type="password"
+            class="page__input"
+            placeholder="Минимум 8 символов"
+            required
+          />
+        </div>
+
+        <div class="page__field">
+          <label class="page__label" for="passwordConfirm">
+            Повторите пароль
+          </label>
+          <input
+            id="passwordConfirm"
+            v-model="form.passwordConfirm"
+            type="password"
+            class="page__input"
+            required
+          />
+          <span v-if="errors.passwordConfirm" class="error_text">
+            {{ errors.passwordConfirm }}
+          </span>
+        </div>
+
+        <div class="page__field">
+          <div class="page__roles">
+            <button
+              type="button"
+              class="page__role"
+              :class="{ 'page__role--active': form.role === 'student' }"
+              @click="form.role = 'student'"
+            >
+              <span class="page__role-title">Ученик</span>
+              <span class="page__role-desc">Готовлюсь к экзаменам</span>
+            </button>
+
+            <button
+              type="button"
+              class="page__role"
+              :class="{ 'page__role--active': form.role === 'teacher' }"
+              @click="form.role = 'teacher'"
+            >
+              <span class="page__role-title">Учитель</span>
+              <span class="page__role-desc">Создаю и веду занятия</span>
+            </button>
+          </div>
+          <span v-if="errors.role" class="error_text">
+            {{ errors.role }}
+          </span>
+        </div>
+
+        <button class="page__button" type="submit">
+          Зарегистрироваться
+        </button>
+      </form>
+
+      <p class="page__footer">
+        Уже есть аккаунт?
+        <a href="#" @click="router.push('/signin')" class="page__link">Войти</a>
+      </p>
+    </div>
+  </div>
+</template>
 
 <style lang="scss">
 
@@ -275,12 +277,6 @@
       pointer-events: all;
       transform: translate(-50%, 50%)
     }
-  }
-
-
-  .error_text {
-    font-size: 12px;
-    color: var(--color-accent-orange);
   }
 
 </style>

@@ -1,31 +1,31 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useUserStore } from '../stores/store_user.js'
 
-import InitialPage from '../pages/InitialPage.vue'
-import TeachHelper from '../pages/TeachHelper.vue'
-import Login from '../pages/Login.vue'
 import Registration from '../pages/Registration.vue'
 import TeacherDashboard from '../pages/dashboards/TeacherDashboard.vue'
 import StudentDashboard from '../pages/dashboards/StudentDashboard.vue'
 import ForgotPassword from '../pages/ForgotPassword.vue'
 import SignUp from '../pages/SignUp.vue'
-import component from 'element-plus/es/components/tree-select/src/tree-select-option.mjs'
 import SignIn from '../pages/SignIn.vue'
 import ValidateEmail from '../pages/ValidateEmail.vue'
 import ConfirmEmail from '../pages/ConfirmEmail.vue'
 import HomePage from '../pages/HomePage.vue'
+import ConfirmReset from '../pages/ConfirmReset.vue'
+import ResetPassword from '../pages/ResetPassword.vue'
 
 
 const routes = [
   { path: '/', component: HomePage, meta: { guest: true } },
   { path: '/signup', component: SignUp, meta: { guest: true } },
   { path: '/signin', component: SignIn, meta: { guest: true } },
-  { path: '/validate_email', component: ValidateEmail, meta: { guest: true } },
   { path: '/confirm_email', component: ConfirmEmail, meta: { guest: true } },
 
   
   { path: '/registration', component: Registration, meta: { guest: true } },
   { path: '/forgot_password', component: ForgotPassword, meta: {guest: true}},
+  { path: '/confirm_reset', component: ConfirmReset, meta: {guest: true}},
+  { path: '/reset_password', component: ResetPassword, meta: {guest: true}},
+
 
    // защищённые маршруты
   { path: '/', component: ValidateEmail, meta: { requiresAuth: true } },

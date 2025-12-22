@@ -2,7 +2,6 @@
   import { ref } from 'vue';
   import { useRouter } from 'vue-router'
 
-
   const router = useRouter()
 
   const email = ref('')
@@ -18,32 +17,29 @@
     loading.value = true
 
     try {
+      console.log(JSON.stringify({ "email": email.value }))
       const response = await fetch(baseURL + '/auth/forgot_password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf-8'
         },
-        body: JSON.stringify({ email: email.value })
+        body: JSON.stringify({ "email": email.value })
       })
 
       const data = await response.json()
 
       if (response.ok) {
+        
         message.value = data.message || 'Письмо с ссылкой отправлено на ваш email!'
         error.value = false
-
         setTimeout(() => {
-          router.push('/login')
-        }, 3000)
-      } else {
-        if (response.status == 422) {
-          message.value = data.detail[0].msg
-        }
-        else {
-          message.value = data.detail || 'Что-то пошло не так'
-        }
+          router.push('/confirm_reset?email=' + email.value)
+        }, 1000)
 
-        error.value = true
+      } else if (response.status == 422) {
+        message.value = data.detail[0].msg
+      } else {
+        message.value = data.detail || 'Что-то пошло не так'
       }
     } catch (err) {
       message.value = 'Не удалось соединиться с сервером. Проверьте интернет.'
@@ -56,31 +52,27 @@
 </script>
 
 <template>
-  <div class="forgotPage">
-    <div class="card">
-      <img src="@/assets/logo.svg" alt="logo">
-      <h1>Reset your password</h1>
-      <p>Enter your user account's verified email address and we will send you a password reset link.</p>
+  <div class="page">
+    <div class="page__card">
+      <h1 class="page__title">Введите email</h1>
+      <p class="warning">Укажите почту на которую привязан аккаунт</p>
+      <form class="page__form">
+        <div class="page__field">
+          <label class="page__label" for="email">Email</label>
+          <input
+            id="email"
+            v-model="email"
+            type="email"
+            class="page__input"
+            placeholder="example@mail.com"
+            required
+          />
+        </div>
+        <button @click.prevent="sendResetEmail" class="btn">Отправить код</button>
+      </form>
+      <p v-if="expiration > 0 && expiration < 60">Отправить повторно через: {{ expiration }}</p>
 
-      <input 
-        v-model="email" 
-        class="emailField" 
-        placeholder="Enter your email address"
-        :disabled="loading"
-      >
-
-      <!-- Сообщение об успехе/ошибке -->
-      <div v-if="message">
-        {{ message }}
-      </div>
-
-      <button 
-        @click="sendResetEmail" 
-        class="sendButton" 
-        :disabled="loading || !email"
-      >
-        {{ loading ? 'Отправляем...' : 'Send password reset email' }}
-      </button>
+      <p class="error_text">{{ message }}</p>
     </div>
   </div>
-</template>
+</template> 

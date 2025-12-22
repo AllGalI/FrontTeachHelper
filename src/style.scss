@@ -4,24 +4,10 @@
 }
 
 body {
-  // width: 100%;
   margin: 0;
-  // overflow: hidden;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
-  // overflow-y: auto;
 }
 
-// #app {
-  // max-width: 1440px;
-  // height: 100%;
-  // width: 100%;
-  // display: flex;
-	// flex-direction: column;
-  // margin: auto;
-  // padding: var(--spacing-m);
-  // padding-top: var(--app-padding-top);
-
-// }
 
 header {
   width: 100%;
@@ -274,6 +260,7 @@ header {
   }
 
   &__input {
+    width: 100%;
     height: 44px;
     padding-left: 12px;
     padding-right: 25px;
@@ -291,6 +278,15 @@ header {
     &::placeholder {
       color: var(--color-text-muted);
     }
+  }
+
+  .eye_icon {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 18px;
+    width: 18px;
   }
 
   &__button {
@@ -359,6 +355,11 @@ header {
 
 
 }
+
+.error_text {
+    font-size: 12px;
+    color: var(--color-accent-orange);
+  }
 
 
 .btn {

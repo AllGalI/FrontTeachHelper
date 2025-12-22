@@ -28,13 +28,13 @@
   }
 
   onMounted(() => {
+    startTimer()
     const inputs = codeInputs.value.querySelectorAll('input')
     
     // Обработчик ввода
     inputs.forEach((input, index) => {
       input.addEventListener('input', async function() {
         message.value = ''
-        loading.value = true
 
         // Переходим к следующему полю, если введено число
         if (this.value){
@@ -48,12 +48,12 @@
             code.value = getCode()
             startTimer()
             try {
-              const response = await fetch(`${baseURL}/auth/confirm_email`, {
+              const response = await fetch(`${baseURL}/auth/confirm_reset`, {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json;charset=utf-8'
                 },
-                body: JSON.stringify({ 
+                body: JSON.stringify({
                   "email": route.query.email,
                   "code": code.value
                 })
@@ -64,7 +64,7 @@
               if (response.ok) {
                 message.value = data.message || 'Код подтверждён!';
                 setTimeout(() => {
-                  router.push('/login');
+                  router.push('/reset_password?token=' + data.token);
                 }, 1000);
               } else {
                 message.value = data.detail || 'Ошибка подтверждения кода';
@@ -125,7 +125,7 @@
     message.value = ''
 
     try {
-      const response = await fetch(baseURL + "/auth/send_code", {
+      const response = await fetch(baseURL + "/auth/forgot_password", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -165,8 +165,7 @@
         </div>
       </form>
       <p v-if="expiration > 0 && expiration < 60">Отправить повторно через: {{ expiration }}</p>
-      <button @click="sendCode" class="btn" :disabled="expiration > 0 || loading">Отправить код</button>
-
+      <button @click="sendCode" class="btn" :disabled="expiration > 0 || loading">Отправить код повторно</button>
       <p class="error_text">{{ message }}</p>
     </div>
   </div>
@@ -174,6 +173,13 @@
 
 
 <style lang="scss">
+  .btn {
+    &:disabled {
+      background-color: gray;
+      box-shadow: none;
+    }
+  }
+
   .code-input {
     display: flex;
     gap: 8px;
